@@ -4,7 +4,7 @@ import {StyleSheet, Animated, Dimensions, View} from 'react-native';
 import {Country} from '../constants/countriesData';
 
 interface Props {
-  data: Country[];
+  items: Country[];
 }
 
 const width = Dimensions.get('window').width;
@@ -19,7 +19,7 @@ const calculateInputRange = (index: number) => {
   ];
 };
 
-const CountryList = ({data}: Props) => {
+const CountryList = ({items}: Props) => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const handleCalculateOpacity = useCallback((index: number) => {
@@ -48,14 +48,14 @@ const CountryList = ({data}: Props) => {
 
   return (
     <Animated.FlatList
-      data={data}
+      data={items}
       keyExtractor={item => item.id.toString()}
       renderItem={({item, index}) => {
         const opacity = handleCalculateOpacity(index);
         const mapSize = handleCalculateMapSize(index);
         const fontSize = handleCalculateFontSize(index);
 
-        if (index === 0 || index === data.length - 1) {
+        if (index === 0 || index === items.length - 1) {
           return <EmptyListItem />;
         }
 
@@ -95,13 +95,7 @@ const CountryList = ({data}: Props) => {
 export default CountryList;
 
 const EmptyListItem = () => {
-  return (
-    <View
-      style={{
-        width: COUNTRY_ITEM_WIDTH,
-      }}
-    />
-  );
+  return <View style={styles.emptyContaienr} />;
 };
 
 interface CountryListItemProps {
@@ -136,6 +130,10 @@ const CountryListItem = ({
 };
 
 const styles = StyleSheet.create({
+  emptyContaienr: {
+    width: COUNTRY_ITEM_WIDTH,
+  },
+
   container: {
     width: COUNTRY_ITEM_WIDTH,
     height: 130,
