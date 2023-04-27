@@ -49,7 +49,7 @@ const AppStackNavigator = () => {
         name={NavigationRoute.homeScreen}
         component={HomeScreen}
         options={{
-          headerTitle: 'Travel',
+          headerTitle: 'Asia',
           headerLargeTitle: true,
           headerTransparent: true,
         }}
