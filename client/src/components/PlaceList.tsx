@@ -61,7 +61,7 @@ const PlaceList = ({contentContainerStyle, items}: Props) => {
         />
       );
     },
-    [],
+    [handleCalculateOpacity, handleCalculateHeight],
   );
 
   return (
