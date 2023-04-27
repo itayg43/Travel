@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 
 import {countriesData, Country, emptyCountry} from '../constants/countriesData';
 import SafeView from '../components/SafeView';
@@ -17,7 +17,10 @@ const HomeScreen = () => {
       <ScrollView>
         <View>
           {/** countries */}
-          <CountryList items={countries} />
+          <CountryList
+            contentContainerStyle={styles.countryList}
+            items={countries}
+          />
 
           {/** places */}
         </View>
@@ -27,3 +30,7 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  countryList: {},
+});
