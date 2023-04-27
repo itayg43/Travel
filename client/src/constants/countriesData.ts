@@ -34,13 +34,6 @@ export interface Country {
   places: Place[];
 }
 
-export const emptyCountry: Country = {
-  id: 0,
-  name: '',
-  image: require('../assets/images/malaysia/malaysia_map.png'),
-  places: [],
-};
-
 export const countriesData = [
   {
     id: 1,
@@ -406,3 +399,25 @@ export const countriesData = [
     ],
   },
 ];
+
+export const emptyCountry: Country = {
+  id: 0,
+  name: '',
+  image: require('../assets/images/malaysia/malaysia_map.png'),
+  places: [],
+};
+
+export const emptyPlace: Place = {
+  id: 0,
+  name: '',
+  description: '',
+  image: require('../assets/images/malaysia/malaysia_map.png'),
+  rate: '',
+  mapInitialRegion: {
+    latitude: 0,
+    longitude: 0,
+    latitudeDelta: 0,
+    longitudeDelta: 0,
+  },
+  hotels: [],
+};

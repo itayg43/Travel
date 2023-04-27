@@ -1,5 +1,13 @@
 import React, {useCallback, useRef} from 'react';
-import {Animated, Dimensions, StyleProp, View, ViewStyle} from 'react-native';
+import {
+  Animated,
+  Dimensions,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  StyleProp,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import {Country} from '../constants/countriesData';
 import CountryListItem from './CountryListItem';
@@ -7,11 +15,12 @@ import CountryListItem from './CountryListItem';
 interface Props {
   contentContainerStyle?: StyleProp<ViewStyle>;
   items: Country[];
+  onSelectItem: (index: number) => void;
 }
 
-const width = Dimensions.get('window').width;
+const DIMENSIONS = Dimensions.get('window');
 
-const COUNTRY_LIST_ITEM_WIDTH = width / 3;
+const COUNTRY_LIST_ITEM_WIDTH = DIMENSIONS.width / 3;
 
 const calculateInputRange = (index: number) => {
   return [
@@ -21,7 +30,7 @@ const calculateInputRange = (index: number) => {
   ];
 };
 
-const CountryList = ({contentContainerStyle, items}: Props) => {
+const CountryList = ({contentContainerStyle, items, onSelectItem}: Props) => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const handleCalculateOpacity = useCallback((index: number) => {
@@ -64,7 +73,15 @@ const CountryList = ({contentContainerStyle, items}: Props) => {
         />
       );
     },
-    [],
+    [handleCalculateOpacity, handleCalculateMapSize, handleCalculateFontSize],
+  );
+
+  const handleScrollEnd = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const index = event.nativeEvent.contentOffset.x / COUNTRY_LIST_ITEM_WIDTH;
+      onSelectItem(index);
+    },
+    [onSelectItem],
   );
 
   return (
@@ -93,6 +110,7 @@ const CountryList = ({contentContainerStyle, items}: Props) => {
           ],
           {useNativeDriver: false},
         )}
+        onMomentumScrollEnd={handleScrollEnd}
       />
     </View>
   );
