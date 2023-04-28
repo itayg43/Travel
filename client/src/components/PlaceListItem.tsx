@@ -10,9 +10,17 @@ interface Props {
   height: Animated.AnimatedInterpolation<string | number>;
   opacity: Animated.AnimatedInterpolation<string | number>;
   item: Place;
+  onSelect: () => void;
 }
 
-const PlaceListItem = ({width, emptyWidth, height, opacity, item}: Props) => {
+const PlaceListItem = ({
+  width,
+  emptyWidth,
+  height,
+  opacity,
+  item,
+  onSelect,
+}: Props) => {
   return item.id < 0 ? (
     <View style={{width: emptyWidth}} />
   ) : (
@@ -29,7 +37,7 @@ const PlaceListItem = ({width, emptyWidth, height, opacity, item}: Props) => {
         <AppButton
           contentContainerStyle={styles.button}
           label="Explore"
-          onPress={() => null}
+          onPress={onSelect}
         />
       </View>
     </Animated.View>

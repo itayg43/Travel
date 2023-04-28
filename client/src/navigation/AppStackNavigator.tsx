@@ -4,6 +4,7 @@ import {
 } from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
 
+import {Place} from '../constants/countriesData';
 import HomeScreen from '../screens/HomeScreen';
 import PlaceDetailsScreen from '../screens/PlaceDetailsScreen';
 
@@ -15,12 +16,12 @@ export enum NavigationRoute {
 }
 
 interface PlaceDetailsScreenProps {
-  id: number;
+  place: Place;
 }
 
 export type AppStackNavigatorParams = {
   [NavigationRoute.homeScreen]: undefined;
-  [NavigationRoute.placeDetailsScreen]: PlaceDetailsScreenProps | undefined;
+  [NavigationRoute.placeDetailsScreen]: PlaceDetailsScreenProps;
 };
 
 // home screen

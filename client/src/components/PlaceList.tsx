@@ -7,6 +7,7 @@ import PlaceListItem from './PlaceListItem';
 interface Props {
   contentContainerStyle?: StyleProp<ViewStyle>;
   items: Place[];
+  onSelectItem: (place: Place) => void;
 }
 
 const DIMENSIONS = Dimensions.get('window');
@@ -23,7 +24,7 @@ const calculateInputRange = (index: number) => {
   ];
 };
 
-const PlaceList = ({contentContainerStyle, items}: Props) => {
+const PlaceList = ({contentContainerStyle, items, onSelectItem}: Props) => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const handleCalculateOpacity = useCallback((index: number) => {
@@ -58,6 +59,7 @@ const PlaceList = ({contentContainerStyle, items}: Props) => {
           height={height}
           opacity={opacity}
           item={item}
+          onSelect={() => onSelectItem(item)}
         />
       );
     },

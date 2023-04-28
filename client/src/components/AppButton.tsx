@@ -6,25 +6,37 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface Props {
   contentContainerStyle?: StyleProp<ViewStyle>;
-  labelStyle?: StyleProp<ViewStyle>;
+  labelColor?: string;
+  iconColor?: string;
   label: string;
+  icon?: string;
   onPress: () => void;
 }
 
 const AppButton = ({
   contentContainerStyle,
-  labelStyle,
+  labelColor = 'white',
+  iconColor = 'white',
   label,
+  icon,
   onPress,
 }: Props) => {
   return (
     <TouchableOpacity
       style={[styles.container, contentContainerStyle]}
       onPress={onPress}>
-      <Text style={[styles.label, labelStyle]}>{label}</Text>
+      <Text style={[styles.label, {color: labelColor}]}>{label}</Text>
+
+      {icon && (
+        <MaterialCommunityIcons
+          style={[styles.icon, {color: iconColor}]}
+          name={icon}
+        />
+      )}
     </TouchableOpacity>
   );
 };
@@ -33,6 +45,7 @@ export default AppButton;
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
     height: 45,
     justifyContent: 'center',
     alignItems: 'center',
@@ -43,5 +56,11 @@ const styles = StyleSheet.create({
   label: {
     color: 'white',
     fontWeight: 'bold',
+  },
+
+  icon: {
+    marginLeft: 5,
+    color: 'white',
+    fontSize: 18,
   },
 });

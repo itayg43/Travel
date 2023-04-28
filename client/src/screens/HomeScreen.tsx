@@ -1,5 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import {
   countriesData,
@@ -8,11 +9,17 @@ import {
   emptyPlace,
   Place,
 } from '../constants/countriesData';
+import {
+  HomeScreenNavigationProp,
+  NavigationRoute,
+} from '../navigation/AppStackNavigator';
 import SafeView from '../components/SafeView';
 import CountryList from '../components/CountryList';
 import PlaceList from '../components/PlaceList';
 
 const HomeScreen = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
   const [countries, setCountries] = useState<Country[]>([
     {...emptyCountry, id: -1},
     ...countriesData,
@@ -36,6 +43,13 @@ const HomeScreen = () => {
     [setPlaces],
   );
 
+  const handlePlaceSelection = useCallback(
+    (place: Place) => {
+      navigation.navigate(NavigationRoute.placeDetailsScreen, {place});
+    },
+    [navigation],
+  );
+
   return (
     <SafeView>
       <ScrollView>
@@ -47,7 +61,11 @@ const HomeScreen = () => {
         />
 
         {/** places */}
-        <PlaceList contentContainerStyle={styles.placeList} items={places} />
+        <PlaceList
+          contentContainerStyle={styles.placeList}
+          items={places}
+          onSelectItem={handlePlaceSelection}
+        />
       </ScrollView>
     </SafeView>
   );
