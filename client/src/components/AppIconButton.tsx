@@ -5,15 +5,23 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 interface Props {
   contentContainerStyle?: StyleProp<ViewStyle>;
   icon: string;
+  iconSize?: number;
+  iconColor?: string;
   onPress: () => void;
 }
 
-const AppIconButton = ({contentContainerStyle, icon, onPress}: Props) => {
+const AppIconButton = ({
+  contentContainerStyle,
+  icon,
+  iconSize = 20,
+  iconColor = 'white',
+  onPress,
+}: Props) => {
   return (
     <TouchableOpacity
       style={[styles.container, contentContainerStyle]}
       onPress={onPress}>
-      <MaterialCommunityIcons name={icon} size={20} color="white" />
+      <MaterialCommunityIcons name={icon} size={iconSize} color={iconColor} />
     </TouchableOpacity>
   );
 };
