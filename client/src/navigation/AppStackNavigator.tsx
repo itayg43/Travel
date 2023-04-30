@@ -4,7 +4,6 @@ import {
 } from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
 
-import {Place} from '../interfaces';
 import HomeScreen from '../screens/HomeScreen';
 import PlaceDetailsScreen from '../screens/PlaceDetailsScreen';
 
