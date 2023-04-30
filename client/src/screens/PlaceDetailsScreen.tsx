@@ -1,8 +1,10 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {StyleSheet, ImageBackground, View, Text} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {Place} from '../interfaces';
+import placesService from '../services/placesService';
 import {
   PlaceDetailsScreenNavigationProp,
   PlaceDetailsScreenRouteProp,
@@ -12,51 +14,66 @@ import AppButton from '../components/AppButton';
 
 const PlaceDetailsScreen = () => {
   const navigation = useNavigation<PlaceDetailsScreenNavigationProp>();
-  const {
-    params: {place},
-  } = useRoute<PlaceDetailsScreenRouteProp>();
+  const route = useRoute<PlaceDetailsScreenRouteProp>();
+
+  const [place, setPlace] = useState<Place | null>(null);
 
   const handleNavigateBack = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
 
+  const handleGetPlace = useCallback(
+    (cid: number, id: number) => {
+      const placeData = placesService.getPlaceByCidAndId(cid, id);
+      setPlace(placeData);
+    },
+    [setPlace],
+  );
+
+  useEffect(() => {
+    const {cid, id} = route.params;
+    handleGetPlace(cid, id);
+  }, [route.params, handleGetPlace]);
+
   return (
     <View style={styles.container}>
-      <ImageBackground style={styles.imageBackground} source={place.image}>
-        {/** go back */}
-        <AppIconButton
-          contentContainerStyle={styles.backIconButton}
-          icon="keyboard-backspace"
-          onPress={handleNavigateBack}
-        />
-
-        {/** details */}
-        <View style={styles.detailsContainer}>
-          {/** name & rating */}
-          <View style={styles.nameAndRatingContainer}>
-            {/** name */}
-            <Text style={styles.name}>{place.name}</Text>
-
-            {/** rating */}
-            <View style={styles.ratingContainer}>
-              <Text style={styles.rating}>{place.rate}</Text>
-              <MaterialCommunityIcons name="star" size={20} color="orange" />
-            </View>
-          </View>
-
-          {/** description */}
-          <Text style={styles.description}>{place.description}</Text>
-
-          <AppButton
-            contentContainerStyle={styles.bookFlightButton}
-            labelColor="black"
-            iconColor="black"
-            label="Book a flight"
-            icon="airplane"
-            onPress={() => null}
+      {place && (
+        <ImageBackground style={styles.imageBackground} source={place.image}>
+          {/** go back */}
+          <AppIconButton
+            contentContainerStyle={styles.backIconButton}
+            icon="keyboard-backspace"
+            onPress={handleNavigateBack}
           />
-        </View>
-      </ImageBackground>
+
+          {/** details */}
+          <View style={styles.detailsContainer}>
+            {/** name & rating */}
+            <View style={styles.nameAndRatingContainer}>
+              {/** name */}
+              <Text style={styles.name}>{place.name}</Text>
+
+              {/** rating */}
+              <View style={styles.ratingContainer}>
+                <Text style={styles.rating}>{place.rate}</Text>
+                <MaterialCommunityIcons name="star" size={20} color="orange" />
+              </View>
+            </View>
+
+            {/** description */}
+            <Text style={styles.description}>{place.description}</Text>
+
+            <AppButton
+              contentContainerStyle={styles.bookFlightButton}
+              labelColor="black"
+              iconColor="black"
+              label="Book a flight"
+              icon="airplane"
+              onPress={() => null}
+            />
+          </View>
+        </ImageBackground>
+      )}
     </View>
   );
 };

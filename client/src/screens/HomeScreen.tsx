@@ -2,12 +2,9 @@ import React, {useCallback, useState} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-import {
-  countriesData,
-  emptyCountry,
-  emptyPlace,
-} from '../constants/countriesData';
-import {Country, Place} from '../interfaces';
+import {Place} from '../interfaces';
+import countriesService from '../services/countriesService';
+import placesService from '../services/placesService';
 import {
   HomeScreenNavigationProp,
   NavigationRoute,
@@ -16,35 +13,26 @@ import SafeView from '../components/SafeView';
 import CountryList from '../components/CountryList';
 import PlaceList from '../components/PlaceList';
 
+const countries = countriesService.getCountries();
+
 const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
-  const [countries, setCountries] = useState<Country[]>([
-    {...emptyCountry, id: -1},
-    ...countriesData,
-    {...emptyCountry, id: -2},
-  ]);
-
-  const [places, setPlaces] = useState<Place[]>([
-    {...emptyPlace, id: -1},
-    ...countriesData[0].places,
-    {...emptyPlace, id: -2},
-  ]);
+  const [places, setPlaces] = useState<Place[]>(countries[0].places);
 
   const handleCountrySelection = useCallback(
     (index: number) => {
-      setPlaces([
-        {...emptyPlace, id: -1},
-        ...countriesData[index].places,
-        {...emptyPlace, id: -2},
-      ]);
+      setPlaces(countries[index].places);
     },
     [setPlaces],
   );
 
   const handlePlaceSelection = useCallback(
     (place: Place) => {
-      navigation.navigate(NavigationRoute.placeDetailsScreen, {place});
+      navigation.navigate(NavigationRoute.placeDetailsScreen, {
+        cid: place.cid,
+        id: place.id,
+      });
     },
     [navigation],
   );
@@ -55,14 +43,22 @@ const HomeScreen = () => {
         {/** countries */}
         <CountryList
           contentContainerStyle={styles.countryList}
-          items={countries}
+          items={[
+            countriesService.getStartCountrySpacer(),
+            ...countries,
+            countriesService.getEndCountrySpacer(),
+          ]}
           onSelectItem={handleCountrySelection}
         />
 
         {/** places */}
         <PlaceList
           contentContainerStyle={styles.placeList}
-          items={places}
+          items={[
+            placesService.getStartPlaceSpacer(),
+            ...places,
+            placesService.getEndPlaceSpacer(),
+          ]}
           onSelectItem={handlePlaceSelection}
         />
       </ScrollView>

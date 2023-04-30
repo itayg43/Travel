@@ -16,7 +16,8 @@ export enum NavigationRoute {
 }
 
 interface PlaceDetailsScreenProps {
-  place: Place;
+  cid: number;
+  id: number;
 }
 
 export type AppStackNavigatorParams = {
