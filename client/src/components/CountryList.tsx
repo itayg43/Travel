@@ -9,7 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import {Country} from '../constants/countriesData';
+import {Country} from '../interfaces';
 import CountryListItem from './CountryListItem';
 
 interface Props {

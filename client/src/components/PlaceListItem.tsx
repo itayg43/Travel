@@ -1,7 +1,7 @@
 import React from 'react';
 import {Animated, View, StyleSheet, Image, Text} from 'react-native';
 
-import {Place} from '../constants/countriesData';
+import {Place} from '../interfaces';
 import AppButton from './AppButton';
 
 interface Props {

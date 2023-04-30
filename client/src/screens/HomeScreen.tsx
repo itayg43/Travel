@@ -4,11 +4,10 @@ import {useNavigation} from '@react-navigation/native';
 
 import {
   countriesData,
-  Country,
   emptyCountry,
   emptyPlace,
-  Place,
 } from '../constants/countriesData';
+import {Country, Place} from '../interfaces';
 import {
   HomeScreenNavigationProp,
   NavigationRoute,

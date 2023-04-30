@@ -1,7 +1,7 @@
 import React, {useCallback, useRef} from 'react';
 import {Animated, Dimensions, StyleProp, View, ViewStyle} from 'react-native';
 
-import {Place} from '../constants/countriesData';
+import {Place} from '../interfaces';
 import PlaceListItem from './PlaceListItem';
 
 interface Props {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Animated, View, StyleSheet} from 'react-native';
 
-import {Country} from '../constants/countriesData';
+import {Country} from '../interfaces';
 
 interface Props {
   width: number;
