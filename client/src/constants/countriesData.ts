@@ -7,6 +7,7 @@ export const countriesData: Country[] = [
     image: require('../assets/images/malaysia/malaysia_map.png'),
     places: [
       {
+        cid: 1,
         id: 1,
         name: 'Kuching',
         description:
@@ -56,6 +57,7 @@ export const countriesData: Country[] = [
         ],
       },
       {
+        cid: 1,
         id: 2,
         name: 'Kuala Lumpur',
         description:
@@ -105,6 +107,7 @@ export const countriesData: Country[] = [
         ],
       },
       {
+        cid: 1,
         id: 3,
         name: 'Penang',
         description:
@@ -161,6 +164,7 @@ export const countriesData: Country[] = [
     image: require('../assets/images/india/india_map.png'),
     places: [
       {
+        cid: 2,
         id: 1,
         name: 'Goa',
         description:
@@ -199,6 +203,7 @@ export const countriesData: Country[] = [
         ],
       },
       {
+        cid: 2,
         id: 2,
         name: 'Jaipur',
         description:
@@ -226,6 +231,7 @@ export const countriesData: Country[] = [
         ],
       },
       {
+        cid: 2,
         id: 3,
         name: 'Agra',
         description:
@@ -260,6 +266,7 @@ export const countriesData: Country[] = [
     image: require('../assets/images/indonesia/indonesia_map.png'),
     places: [
       {
+        cid: 3,
         id: 1,
         name: 'Bali',
         description:
@@ -298,6 +305,7 @@ export const countriesData: Country[] = [
         ],
       },
       {
+        cid: 3,
         id: 2,
         name: 'Jakarta',
         description:
@@ -336,6 +344,7 @@ export const countriesData: Country[] = [
         ],
       },
       {
+        cid: 3,
         id: 3,
         name: 'Nusa Penida',
         description:
@@ -374,6 +383,7 @@ export const emptyCountry: Country = {
 };
 
 export const emptyPlace: Place = {
+  cid: 0,
   id: 0,
   name: '',
   description: '',

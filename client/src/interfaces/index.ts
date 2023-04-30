@@ -13,6 +13,7 @@ export interface Hotel {
 }
 
 export interface Place {
+  cid: number;
   id: number;
   name: string;
   description: string;
