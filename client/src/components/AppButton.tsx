@@ -14,7 +14,7 @@ interface Props {
   iconColor?: string;
   label: string;
   icon?: string;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 const AppButton = ({

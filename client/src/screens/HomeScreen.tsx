@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StatusBar, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import {Place} from '../interfaces';
@@ -39,6 +39,7 @@ const HomeScreen = () => {
 
   return (
     <SafeView safeContainerStyle={styles.safeContaienr}>
+      <StatusBar barStyle="light-content" />
       <ScrollView>
         {/** countries */}
         <CountryList
