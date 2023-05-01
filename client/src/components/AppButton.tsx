@@ -19,8 +19,8 @@ interface Props {
 
 const AppButton = ({
   contentContainerStyle,
-  labelColor = 'white',
-  iconColor = 'white',
+  labelColor = 'black',
+  iconColor = 'black',
   label,
   icon,
   onPress,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
 
   label: {

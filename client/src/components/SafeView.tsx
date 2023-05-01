@@ -9,12 +9,17 @@ import {
 
 interface Props {
   children: ReactNode;
+  safeContainerStyle?: StyleProp<ViewStyle>;
   contentContainerStyle?: StyleProp<ViewStyle>;
 }
 
-const SafeView = ({children, contentContainerStyle}: Props) => {
+const SafeView = ({
+  children,
+  safeContainerStyle,
+  contentContainerStyle,
+}: Props) => {
   return (
-    <SafeAreaView style={styles.safeAreaContaienr}>
+    <SafeAreaView style={[styles.safeAreaContaienr, safeContainerStyle]}>
       <View style={[styles.contentContaienr, contentContainerStyle]}>
         {children}
       </View>

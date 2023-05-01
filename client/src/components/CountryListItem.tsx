@@ -17,7 +17,7 @@ const CountryListItem = ({width, opacity, mapSize, textSize, item}: Props) => {
   ) : (
     <Animated.View style={[styles.container, {width, opacity}]}>
       <Animated.Image
-        style={{width: mapSize, height: mapSize}}
+        style={[styles.image, {width: mapSize, height: mapSize}]}
         source={item.image}
         resizeMode="contain"
       />
@@ -37,7 +37,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  image: {
+    tintColor: 'white',
+  },
+
   text: {
+    color: 'white',
     marginTop: 3,
   },
 });

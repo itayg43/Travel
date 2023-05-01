@@ -1,5 +1,12 @@
 import {ImageURISource} from 'react-native/types';
 
+export interface MapRegion {
+  latitude: number;
+  longitude: number;
+  latitudeDelta: number;
+  longitudeDelta: number;
+}
+
 export interface Hotel {
   id: string;
   name: string;
@@ -19,12 +26,7 @@ export interface Place {
   description: string;
   image: ImageURISource;
   rate: string;
-  mapInitialRegion: {
-    latitude: number;
-    longitude: number;
-    latitudeDelta: number;
-    longitudeDelta: number;
-  };
+  mapInitialRegion: MapRegion;
   hotels: Hotel[];
 }
 

@@ -31,18 +31,17 @@ const HomeScreen = () => {
     (place: Place) => {
       navigation.navigate(NavigationRoute.placeDetailsScreen, {
         cid: place.cid,
-        id: place.id,
+        pid: place.id,
       });
     },
     [navigation],
   );
 
   return (
-    <SafeView>
+    <SafeView safeContainerStyle={styles.safeContaienr}>
       <ScrollView>
         {/** countries */}
         <CountryList
-          contentContainerStyle={styles.countryList}
           items={[
             countriesService.getStartCountrySpacer(),
             ...countries,
@@ -69,7 +68,9 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  countryList: {},
+  safeContaienr: {
+    backgroundColor: 'black',
+  },
 
   placeList: {
     marginTop: 20,
